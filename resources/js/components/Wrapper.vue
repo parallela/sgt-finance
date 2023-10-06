@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full h-full flex justify-start p-8">
+    <div class="w-full h-full flex p-8">
             <slot />
     </div>
 </template>

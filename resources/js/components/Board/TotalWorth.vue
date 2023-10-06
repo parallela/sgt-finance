@@ -1,6 +1,6 @@
 <template>
     <div
-        class="flex flex-col bg-gradient-to-r from-indigo-900 to-indigo-800 hover:from-indigo-800 hover:to-indigo-900 h-[17.5rem] w-96 rounded-2xl shadow-md shadow-indigo-800"
+        class="flex flex-col bg-gradient-to-r from-indigo-900 to-indigo-800 hover:from-indigo-800 hover:to-indigo-900 h-[17.5rem] w-96 rounded-2xl shadow-md shadow-indigo-800 mr-4"
     >
         <!-- Card Heading -->
         <div class="p-4">
@@ -10,10 +10,13 @@
 
             <div class="text-3xl text-gray-300 flex flex-col">
                 <!-- Currency -->
-                <div class="">
+                <div>
                     <span class="text-4xl mt-6">$</span>
                     <span class="text-6xl mt-2">4.20</span>
                     <span class="text-4xl mt-6">K</span>
+                </div>
+                <div class="inline-block h-0.5">
+                    <span class="text-xs text-gray-600">Updated 2 mins ago...</span>
                 </div>
             </div>
         </div>
