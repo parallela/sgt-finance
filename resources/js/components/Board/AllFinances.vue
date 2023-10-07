@@ -1,6 +1,6 @@
 <template>
     <div
-        class="flex flex-col bg-gradient-to-r from-indigo-900 to-indigo-800 hover:from-indigo-800 hover:to-indigo-900 h-[17.5rem] w-1/2 rounded-2xl shadow-md shadow-indigo-800 mr-4"
+        class="flex flex-col bg-gradient-to-r from-indigo-900 to-indigo-800 hover:from-indigo-800 hover:to-indigo-900 w-1/2 rounded-2xl shadow-md shadow-indigo-800 mr-4"
     >
         <!-- Card Heading -->
         <div class="p-4">
@@ -17,29 +17,29 @@
                                 Stock
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Color
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Category
-                            </th>
-                            <th scope="col" class="px-6 py-3">
                                 Price
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Increase
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                You should
                             </th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr class="bg-gradient-to-r from-indigo-900 to-indigo-800 hover:from-indigo-800 hover:to-indigo-900">
+                        <tr v-for="stock in stocks" class="bg-gradient-to-r from-indigo-900 to-indigo-800 hover:from-indigo-800 hover:to-indigo-900">
                             <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap text-white">
-                                Apple MacBook Pro 17"
+                                {{stock.name}}
                             </th>
                             <td class="px-6 py-4">
-                                Silver
+                                {{stock.current_price}}
                             </td>
                             <td class="px-6 py-4">
-                                Laptop
+                                {{stock.increase}}
                             </td>
                             <td class="px-6 py-4">
-                                $2999
+                                {{stock.actions.join(' | ')}}
                             </td>
                         </tr>
                         </tbody>
@@ -56,7 +56,40 @@ import { initFlowbite } from 'flowbite';
 export default {
     mounted() {},
     data() {
-        return {};
+        return {
+            stocks: [
+                {
+                    "name": "Apple",
+                    "current_price": "$239.20 USD",
+                    "increase": "0.23%",
+                    "actions": ['buy']
+                },
+                {
+                    "name": "Tesla",
+                    "current_price": "$239.20 USD",
+                    "increase": "0.23%",
+                    "actions": ['buy']
+                },
+                {
+                    "name": "Microsoft",
+                    "current_price": "$239.20 USD",
+                    "increase": "0.23%",
+                    "actions": ['buy']
+                },
+                {
+                    "name": "SMP500",
+                    "current_price": "$239.20 USD",
+                    "increase": "0.23%",
+                    "actions": ['buy']
+                },
+                {
+                    "name": "Nvidia",
+                    "current_price": "$239.20 USD",
+                    "increase": "0.23%",
+                    "actions": ['buy']
+                }
+            ]
+        };
     },
 };
 </script>

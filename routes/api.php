@@ -1,19 +1,16 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Enums\RoutePrefixEnum;
+use App\Http\Controllers\Metrics\WorthController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Prefixes for the main api routes
+
+/**
+ * Getting the metrics that are responsible for the daily statistics
+ */
+Route::group(['prefix' => RoutePrefixEnum::METRICS], function () {
+    // Getting the total worth of all stocks for the last 25 days.
+    Route::get('/total-worth', [WorthController::class, 'index']);
 });
