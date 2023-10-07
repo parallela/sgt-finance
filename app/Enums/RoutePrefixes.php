@@ -2,6 +2,6 @@
 namespace App\Enums;
 
 
-enum RoutePrefixEnum: string{
+enum RoutePrefixes: string{
     case METRICS = 'metrics';
 }
