@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Clients\Polygon;
+use App\Clients\Serp;
 use App\Services\ScrapperService;
 use App\Services\WorthService;
 use Illuminate\Support\Facades\Http;
@@ -22,7 +22,7 @@ class SgtFinanceServiceProvider extends ServiceProvider
          */
         $this->app->singleton(
             ScrapperService::class,
-            fn() => new ScrapperService(new Polygon())
+            fn() => new ScrapperService(new Serp())
         );
     }
 
@@ -32,14 +32,25 @@ class SgtFinanceServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // Add http provider for communicating the polygon api
+        $this->registerPolygonHttpClient();
+    }
+
+    /**
+     * @return void
+     */
+    protected function registerPolygonHttpClient(): void
+    {
         Http::macro(
-            'polygon',
+            'serp',
             fn() => Http::withHeaders([
-                'Authorization' =>
-                    'Bearer ' . config('clients.polygon.api_key'), // Providing API key for the requests
                 'Accept' => 'application/json',
                 'Content-Type' => 'application/json'
             ])
+                ->withQueryParameters([
+                    'api_key' => config('clients.serp.api_key'),
+                    'engine' => config('clients.serp.engines.googleFinance')
+                ])
+                ->baseUrl(config('clients.serp.endpoint'))
         );
     }
 }
