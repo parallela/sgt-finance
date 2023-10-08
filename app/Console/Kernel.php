@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Jobs\StocksDataScrapperJob;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -12,7 +13,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        // We schedule the price scrapper every minute for new updates
+        // For bigger data and execution this could be in separate queue with
+        // long execution
+        $schedule->job(StocksDataScrapperJob::class)->everyMinute();
     }
 
     /**
@@ -20,7 +24,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands(): void
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }
