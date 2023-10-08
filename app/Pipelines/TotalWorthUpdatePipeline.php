@@ -4,14 +4,11 @@ namespace App\Pipelines;
 
 use App\Actions\CreateStock;
 use App\Data\IndexData;
+use App\Jobs\StoreWorthPointJob;
 use Closure;
 use Illuminate\Support\Collection;
 
-/**
- * This pipeline will be responsible for storing the scrapped information
- * into the database via dispatching the job for inserting
- */
-class StoreIndexesPipeline
+class TotalWorthUpdatePipeline
 {
     /**
      * @param Collection $translatedResponse
@@ -20,10 +17,10 @@ class StoreIndexesPipeline
      */
     public function handle(Collection $translatedResponse, Closure $next): mixed
     {
-        // Store the data into the stocks table
-        $translatedResponse->map(
-            fn(IndexData $index) => app(CreateStock::class)->execute($index)
-        );
+        // Calculate store worth points
+        // and dispatch event for update
+        // This can be dispatched on different queue but for the simplicity of the project lets leave it like this
+        StoreWorthPointJob::dispatch();
 
         return $next($translatedResponse);
     }
