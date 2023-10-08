@@ -35,11 +35,10 @@ class StoreWorthPointJob implements ShouldQueue
         InfluxDB::writePoints(
             [
                 new Point(
-                    'total_worth',
-                    null,
-                    ['worth'],
-                    ['total' => (string) $totalWorth],
-                    now()->timestamp
+                    measurement: 'total_worth',
+                    value: $totalWorth,
+                    tags: ['worth'],
+                    timestamp: now()->timestamp
                 )
             ],
             Database::PRECISION_SECONDS
