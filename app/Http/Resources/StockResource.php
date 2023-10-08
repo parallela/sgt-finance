@@ -12,8 +12,9 @@ class StockResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at
+            'stock_name' => $this->stock_name,
+            'en_name' => $this->en_name,
+            'market' => new MarketResource($this->whenLoaded('market'))
         ];
     }
 }

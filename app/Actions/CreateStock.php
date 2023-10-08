@@ -19,12 +19,20 @@ class CreateStock
      */
     public function execute(IndexData $index): Stock
     {
-        return Stock::updateOrCreate(
+        $stock = Stock::updateOrCreate(
             [
                 'stock_name' => $index->stock_name,
                 'market_id' => $index->market_id
             ],
             ['en_name' => $index->en_name]
         );
+
+        $stock->prices()->create([
+            'price' => $index->price,
+            'percentage' => $index->priceMovement->percentage,
+            'movement' => $index->priceMovement->movement
+        ]);
+
+        return $stock;
     }
 }

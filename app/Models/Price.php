@@ -11,6 +11,8 @@ class Price extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['price', 'stock_id', 'percentage', 'movement'];
+
     /**
      * Cast movement column to enum
      *

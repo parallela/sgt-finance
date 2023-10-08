@@ -2,6 +2,8 @@
 
 namespace App\Pipelines;
 
+use App\Actions\CreateStock;
+use App\Data\IndexData;
 use Closure;
 use Illuminate\Support\Collection;
 
@@ -19,6 +21,9 @@ class StoreIndexesPipeline
     public function handle(Collection $translatedResponse, Closure $next): mixed
     {
         // Store the data into the stocks table
+        $translatedResponse->map(
+            fn(IndexData $index) => app(CreateStock::class)->execute($index)
+        );
 
         return $next($translatedResponse);
     }

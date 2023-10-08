@@ -12,9 +12,7 @@ class MarketResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'state' => $this->state,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at
+            'state' => $this->state
         ];
     }
 }

@@ -12,6 +12,10 @@ class PriceResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'stock' => new StockResource($this->whenLoaded('stock')),
+            'price' => $this->price,
+            'percentage' => $this->percentage,
+            'movement' => $this->movement,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];

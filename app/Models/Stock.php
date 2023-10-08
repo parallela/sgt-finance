@@ -11,6 +11,8 @@ class Stock extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['stock_name', 'en_name', 'market_id'];
+
     public function prices(): HasMany
     {
         return $this->hasMany(Price::class);
