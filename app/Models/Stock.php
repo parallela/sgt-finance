@@ -4,7 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Spatie\Blink\Blink;
 
 class Stock extends Model
@@ -18,9 +20,9 @@ class Stock extends Model
         return $this->hasMany(Price::class);
     }
 
-    public function latestPrice(): void
+    public function latestPrice(): HasOne
     {
-        $this->hasOne(Price::class)->orderBy('created_at', 'desc');
+        return $this->hasOne(Price::class)->orderBy('created_at', 'desc');
     }
 
     /**
@@ -37,5 +39,13 @@ class Stock extends Model
                 ->orderBy('created_at')
                 ->first()
         );
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function market(): BelongsTo
+    {
+        return $this->belongsTo(Market::class);
     }
 }
