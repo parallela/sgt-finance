@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Contracts\Servicable;
+use App\Models\Price;
 
 class WorthService implements Servicable
 {
@@ -14,7 +15,15 @@ class WorthService implements Servicable
 
     public function update()
     {
-        // TODO: Implement update() method.
+    }
+
+    /**
+     * Get the total worth for all stocks
+     * @return int
+     */
+    public function calculateTotalWorth(): float
+    {
+        return Price::groupBy('stock_id')->latest()->sum('price');
     }
 
     public function show()
