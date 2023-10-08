@@ -24,5 +24,8 @@ class StocksDataScrapperJob implements ShouldQueue
             ->send(app(ScrapperService::class)->show())
             ->through(config('pipelines.store_by_response'))
             ->thenReturn();
+
+
+        //TODO: schedule a job for calculating the total worth
     }
 }
