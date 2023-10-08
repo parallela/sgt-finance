@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Actions\CreateTotalWorth;
 use App\Contracts\Servicable;
 use App\Data\TotalWorthData;
 use App\Models\Price;
@@ -24,17 +25,7 @@ class WorthService implements Servicable
      */
     public function store(): Collection
     {
-        InfluxDB::writePoints(
-            [
-                new Point(
-                    measurement: 'total_worth',
-                    value: (string) $this->totalWorth,
-                    tags: ['worth'],
-                    timestamp: now()->timestamp
-                )
-            ],
-            Database::PRECISION_SECONDS
-        );
+        app(CreateTotalWorth::class)->execute($this->totalWorth);
 
         return $this->show();
     }
