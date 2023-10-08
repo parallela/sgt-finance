@@ -2,10 +2,15 @@
 
 namespace App\Services;
 
+use App\Contracts\Clientable;
 use App\Contracts\Servicable;
 
 class ScrapperService implements Servicable
 {
+    public function __construct(public Clientable $client)
+    {
+    }
+
     public function store()
     {
         // TODO: Implement store() method.
@@ -16,8 +21,8 @@ class ScrapperService implements Servicable
         // TODO: Implement update() method.
     }
 
-    public function show()
+    public function show(): array
     {
-        // TODO: Implement show() method.
+        return $this->client->getIndexes();
     }
 }
